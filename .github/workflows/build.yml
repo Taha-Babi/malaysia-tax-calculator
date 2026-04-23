@@ -1,43 +1,81 @@
-name: Build Android APK
-
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-22.04
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            git zip unzip openjdk-17-jdk \
-            autoconf libtool pkg-config \
-            zlib1g-dev libncurses5-dev libncursesw5-dev \
-            libtinfo5 cmake libffi-dev libssl-dev
-
-      - name: Install Python dependencies
-        run: |
-          pip install --upgrade pip
-          pip install buildozer cython setuptools
-
-      - name: Build APK
-        run: |
-          buildozer android debug
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: MalaysiaTaxCalculator-APK
-          path: bin/*.apk
+# Command failed: ['/opt/hostedtoolcache/Python/3.11.15/x64/bin/python', '-m', 'pythonforandroid.toolchain', 'create', '--dist_name=malaysiataxcalculator', '--bootstrap=sdl2', '--requirements=python3,kivy', '--arch=arm64-v8a', '--arch=armeabi-v7a', '--copy-libs', '--color=always', '--storage-dir=/home/runner/work/malaysia-tax-calculator/malaysia-tax-calculator/.buildozer/android/platform/build-arm64-v8a_armeabi-v7a', '--ndk-api=21', '--ignore-setup-py', '--debug']
+# ENVIRONMENT:
+#     SHELL = '/bin/bash'
+#     SELENIUM_JAR_PATH = '/usr/share/java/selenium-server.jar'
+#     CONDA = '/usr/share/miniconda'
+#     GITHUB_WORKSPACE = '/home/runner/work/malaysia-tax-calculator/malaysia-tax-calculator'
+#     JAVA_HOME_11_X64 = '/usr/lib/jvm/temurin-11-jdk-amd64'
+#     JAVA_HOME_25_X64 = '/usr/lib/jvm/temurin-25-jdk-amd64'
+#     PKG_CONFIG_PATH = '/opt/hostedtoolcache/Python/3.11.15/x64/lib/pkgconfig'
+#     GITHUB_PATH = '/home/runner/work/_temp/_runner_file_commands/add_path_e9898996-3067-47ca-8787-878bb8760f62'
+#     GITHUB_ACTION = '__run_3'
+#     JAVA_HOME = '/usr/lib/jvm/temurin-11-jdk-amd64'
+#     GITHUB_RUN_NUMBER = '2'
+#     RUNNER_NAME = 'GitHub Actions 1000000001'
+#     GRADLE_HOME = '/usr/share/gradle-9.4.1'
+#     GITHUB_REPOSITORY_OWNER_ID = '67019492'
+#     ACTIONS_RUNNER_ACTION_ARCHIVE_CACHE = '/opt/actionarchivecache'
+#     XDG_CONFIG_HOME = '/home/runner/.config'
+#     Python_ROOT_DIR = '/opt/hostedtoolcache/Python/3.11.15/x64'
+#     DOTNET_SKIP_FIRST_TIME_EXPERIENCE = '1'
+#     ANT_HOME = '/usr/share/ant'
+#     JAVA_HOME_8_X64 = '/usr/lib/jvm/temurin-8-jdk-amd64'
+#     GITHUB_TRIGGERING_ACTOR = 'Taha-Babi'
+#     pythonLocation = '/opt/hostedtoolcache/Python/3.11.15/x64'
+#     GITHUB_REF_TYPE = 'branch'
+#     HOMEBREW_CLEANUP_PERIODIC_FULL_DAYS = '3650'
+#     ANDROID_NDK = '/usr/local/lib/android/sdk/ndk/27.3.13750724'
+#     BOOTSTRAP_HASKELL_NONINTERACTIVE = '1'
+#     PWD = '/home/runner/work/malaysia-tax-calculator/malaysia-tax-calculator'
+#     PIPX_BIN_DIR = '/opt/pipx_bin'
+#     LOGNAME = 'runner'
+#     GITHUB_REPOSITORY_ID = '1218589371'
+#     GITHUB_ACTIONS = 'true'
+#     USE_BAZEL_FALLBACK_VERSION = 'silent:'
+#     ANDROID_NDK_LATEST_HOME = '/usr/local/lib/android/sdk/ndk/29.0.14206865'
+#     SYSTEMD_EXEC_PID = '1819'
+#     GITHUB_SHA = '54ce73fa623f2761aec06bff15e61cd4d047b180'
+#     GOROOT_1_24_X64 = '/opt/hostedtoolcache/go/1.24.13/x64'
+#     GITHUB_REF_NAME = 'main'
+#     GITHUB_JOB = 'build'
+#     LD_LIBRARY_PATH = '/opt/hostedtoolcache/Python/3.11.15/x64/lib'
+#     XDG_RUNTIME_DIR = '/run/user/1001'
+#     AZURE_EXTENSION_DIR = '/opt/az/azcliextensions'
+#     GITHUB_REPOSITORY = 'Taha-Babi/malaysia-tax-calculator'
+#     Python2_ROOT_DIR = '/opt/hostedtoolcache/Python/3.11.15/x64'
+#     GOROOT_1_22_X64 = '/opt/hostedtoolcache/go/1.22.12/x64'
+#     ANDROID_NDK_ROOT = '/usr/local/lib/android/sdk/ndk/27.3.13750724'
+#     CHROME_BIN = '/usr/bin/google-chrome'
+#     GITHUB_RETENTION_DAYS = '90'
+#     JOURNAL_STREAM = '8:13691'
+#     RUNNER_WORKSPACE = '/home/runner/work/malaysia-tax-calculator'
+#     LEIN_HOME = '/usr/local/lib/lein'
+#     LEIN_JAR = '/usr/local/lib/lein/self-installs/leiningen-2.12.0-standalone.jar'
+#     GITHUB_ACTION_REPOSITORY = ''
+#     PATH = '/home/runner/.buildozer/android/platform/apache-ant-1.9.4/bin:/opt/hostedtoolcache/Python/3.11.15/x64/bin:/opt/hostedtoolcache/Python/3.11.15/x64:/snap/bin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin'
+#     GITHUB_BASE_REF = ''
+#     GHCUP_INSTALL_BASE_PREFIX = '/usr/local'
+#     CI = 'true'
+#     SWIFT_PATH = '/usr/share/swift/usr/bin'
+#     ImageOS = 'ubuntu22'
+#     GITHUB_REPOSITORY_OWNER = 'Taha-Babi'
+#     GITHUB_HEAD_REF = ''
+#     GITHUB_ACTION_REF = ''
+#     ENABLE_RUNNER_TRACING = 'true'
+#     GITHUB_WORKFLOW = 'Build Android APK'
+#     DEBIAN_FRONTEND = 'noninteractive'
+#     GITHUB_OUTPUT = '/home/runner/work/_temp/_runner_file_commands/set_output_e9898996-3067-47ca-8787-878bb8760f62'
+#     AGENT_TOOLSDIRECTORY = '/opt/hostedtoolcache'
+#     _ = '/opt/hostedtoolcache/Python/3.11.15/x64/bin/buildozer'
+#     PACKAGES_PATH = '/home/runner/.buildozer/android/packages'
+#     ANDROIDSDK = '/home/runner/.buildozer/android/platform/android-sdk'
+#     ANDROIDNDK = '/home/runner/.buildozer/android/platform/android-ndk-r25b'
+#     ANDROIDAPI = '33'
+#     ANDROIDMINAPI = '21'
+# 
+# Buildozer failed to execute the last command
+# The error might be hidden in the log above this error
+# Please read the full log, and search for it before
+# raising an issue with buildozer itself.
+# In case of a bug report, please add a full log with log_level = 2
+Error: Process completed with exit code 1.
